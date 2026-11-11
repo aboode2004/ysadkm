@@ -1,12 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>  إلى أجمل صدفة وبسمه  ❤️</title>
+<meta name="theme-color" content="#f9dce6">
+<title>أجمل صدفة في حياتي ❤️</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700&display=swap');
+
+:root {
+    --pink: #d85b83;
+    --dark: #8d3659;
+    --light: #fff0f5;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -15,121 +23,354 @@
 
 body {
     min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
     overflow-x: hidden;
-    font-family: Tahoma, Arial, sans-serif;
-    background: linear-gradient(135deg, #fff0f4, #fbd0dc, #ffe6ed);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #913d5a;
+    background: linear-gradient(
+        135deg,
+        #fff5f7,
+        #f9d9e5,
+        #fceaf0,
+        #f7d1df
+    );
+    background-size: 300% 300%;
+    animation: backgroundMove 15s ease infinite;
+    color: var(--dark);
 }
 
-.container {
-    width: 90%;
-    max-width: 480px;
-    text-align: center;
-    padding: 35px 22px;
-    background: rgba(255,255,255,.72);
-    border: 1px solid rgba(255,255,255,.9);
-    border-radius: 28px;
-    box-shadow: 0 15px 50px rgba(165,70,105,.15);
+@keyframes backgroundMove {
+    0%,100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* إضاءة الخلفية */
+
+.glow {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .4;
+    pointer-events: none;
+}
+
+.glow.one {
+    background: #f58eaf;
+    top: 5%;
+    right: -100px;
+}
+
+.glow.two {
+    background: #e7a6c2;
+    bottom: 5%;
+    left: -100px;
+}
+
+/* الصفحة */
+
+.page {
     position: relative;
     z-index: 2;
-    backdrop-filter: blur(12px);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 15px;
 }
 
-.rose {
-    font-size: 75px;
-    animation: heartbeat 2s infinite;
-    margin-bottom: 15px;
+.card {
+    width: 100%;
+    max-width: 510px;
+    padding: 30px 23px;
+    text-align: center;
+    background: rgba(255,255,255,.65);
+    border: 1px solid rgba(255,255,255,.85);
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 65px rgba(145,53,88,.13);
+    animation: cardAppear 1.5s ease;
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* الوردة */
+
+.main-rose {
+    font-size: 76px;
+    display: block;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 7px 10px #d88aa0);
+    animation: rosePulse 3s infinite ease-in-out;
+}
+
+@keyframes rosePulse {
+    0%,100% { transform: scale(1) rotate(-4deg); }
+    50% { transform: scale(1.12) rotate(4deg); }
 }
 
 h1 {
-    font-size: 27px;
-    margin-bottom: 22px;
-    color: #b34268;
+    font-family: 'Amiri', serif;
+    font-size: 34px;
+    color: #a53e65;
+    margin-bottom: 10px;
 }
 
-.message {
-    font-size: 19px;
-    line-height: 2.1;
-    min-height: 170px;
+.subtitle {
+    color: #ad6b83;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+/* الظرف */
+
+.envelope-area {
+    margin: 30px auto;
+    width: 180px;
+    height: 130px;
+    position: relative;
+    cursor: pointer;
+    perspective: 700px;
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e99ab4;
+    border-radius: 8px;
+    bottom: 0;
+    box-shadow: 0 10px 20px #d88ba8;
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #f5bfd0;
+    clip-path: polygon(0 0, 100% 0, 50% 70%);
+    transform-origin: top;
+    transition: transform 1s;
+    z-index: 4;
+}
+
+.envelope:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #df83a1;
+    clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+    z-index: 3;
+}
+
+.heart-seal {
+    position: absolute;
+    z-index: 5;
+    top: 43px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 35px;
+    transition: .6s;
+}
+
+.envelope.open:before {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .heart-seal {
     opacity: 0;
-    transition: 2s;
+    transform: translateX(-50%) scale(0);
 }
 
-.message.show {
-    opacity: 1;
+/* الرسالة */
+
+.letter {
+    display: none;
+    margin-top: 30px;
+    padding: 24px 17px;
+    background: linear-gradient(145deg,#fffafd,#fff0f5);
+    border: 1px solid #f4c6d6;
+    border-radius: 20px;
+    box-shadow: inset 0 0 20px rgba(220,130,160,.08);
+    animation: letterAppear 1.4s ease forwards;
 }
 
-.highlight {
-    color: #d34876;
+.letter.show {
+    display: block;
+}
+
+@keyframes letterAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.letter-title {
+    font-family: 'Amiri', serif;
+    color: #b44870;
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+.letter-text {
+    font-family: 'Amiri', serif;
+    font-size: 23px;
+    line-height: 2.1;
+    color: #855069;
+    min-height: 220px;
+}
+
+.letter-text span {
+    display: block;
+    opacity: 0;
+    animation: textShow 1.2s forwards;
+}
+
+.letter-text span:nth-child(1) { animation-delay: .5s; }
+.letter-text span:nth-child(2) { animation-delay: 2s; }
+.letter-text span:nth-child(3) { animation-delay: 3.5s; }
+.letter-text span:nth-child(4) { animation-delay: 5s; }
+.letter-text span:nth-child(5) { animation-delay: 6.5s; }
+
+@keyframes textShow {
+    to { opacity: 1; }
+}
+
+.special {
+    color: #cf527d;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 27px;
+}
+
+.divider {
+    width: 65%;
+    height: 1px;
+    margin: 20px auto;
+    background: linear-gradient(to right,transparent,#d77b9b,transparent);
+}
+
+.signature {
+    font-family: 'Amiri',serif;
+    font-size: 23px;
+    color: #c14c77;
+}
+
+/* الأزرار */
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    margin-top: 25px;
 }
 
 button {
     border: none;
-    background: linear-gradient(135deg, #dc668b, #ad3f68);
-    color: white;
-    padding: 15px 35px;
-    border-radius: 50px;
-    font-size: 17px;
+    font-family: 'Cairo',sans-serif;
     cursor: pointer;
-    margin-top: 20px;
-    box-shadow: 0 7px 20px #d88aa6;
+    border-radius: 50px;
     transition: .3s;
 }
 
-button:hover {
-    transform: scale(1.06);
+.open-btn {
+    padding: 14px 38px;
+    color: white;
+    font-size: 16px;
+    background: linear-gradient(135deg,#e47d9e,#b54470);
+    box-shadow: 0 7px 20px #dba0b5;
+}
+
+.open-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px #d18ca6;
+}
+
+.music-btn {
+    padding: 10px 22px;
+    color: #a5486c;
+    background: #fff1f6;
+    border: 1px solid #edc2d1;
+    font-size: 13px;
+}
+
+.music-btn:hover {
+    background: #f9dce7;
 }
 
 .footer {
-    margin-top: 25px;
-    color: #b96a85;
-    font-size: 14px;
+    margin-top: 27px;
+    color: #b16d86;
+    font-family: 'Amiri',serif;
+    font-size: 18px;
 }
+
+/* بتلات الورود */
 
 .petal {
     position: fixed;
-    top: -30px;
+    top: -40px;
     z-index: 1;
     pointer-events: none;
     animation: fall linear forwards;
-}
-
-.heart {
-    position: fixed;
-    bottom: -30px;
-    animation: rise 7s linear forwards;
-    pointer-events: none;
-    z-index: 1;
+    opacity: .8;
 }
 
 @keyframes fall {
-    to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: .2;
+    0% {
+        transform: translateY(-30px) rotate(0deg);
+        opacity: .9;
     }
-}
-
-@keyframes rise {
-    to {
-        transform: translateY(-110vh);
+    100% {
+        transform: translateY(110vh) rotate(650deg);
         opacity: 0;
     }
 }
 
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.12); }
+/* القلوب */
+
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    z-index: 3;
+    pointer-events: none;
+    animation: rise 7s linear forwards;
 }
 
-#musicText {
-    font-size: 13px;
-    margin-top: 12px;
-    color: #a65b76;
+@keyframes rise {
+    to {
+        transform: translateY(-110vh) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+.music-note {
+    display: inline-block;
+    animation: noteMove 1s infinite alternate;
+}
+
+@keyframes noteMove {
+    to { transform: translateY(-5px); }
+}
+
+@media(max-width:400px) {
+    .card { padding: 25px 15px; }
+    h1 { font-size: 29px; }
+    .letter-text { font-size: 21px; }
+    .main-rose { font-size: 65px; }
 }
 
 </style>
@@ -137,156 +378,267 @@ button:hover {
 
 <body>
 
-<div class="container">
+<div class="glow one"></div>
+<div class="glow two"></div>
 
-    <div class="rose">🌹</div>
+<main class="page">
+<div class="card">
+
+    <span class="main-rose">🌹</span>
 
     <h1>إلى أجمل صدفة في حياتي</h1>
 
-    <div class="message" id="message">
-        <p>هناك أيام تمر عادية...</p>
+    <p class="subtitle">
+        هناك شيء صغير أريد أن أخبركِ به...
+    </p>
 
-        <p>وهناك يوم يبقى في الذاكرة إلى الأبد.</p>
-
-        <br>
-
-        <p class="highlight">
-            أفضل يوم في حياتي...
-        </p>
-
-        <p>
-            هو اليوم الذي تعرّفتُ عليكِ فيه ❤️
-        </p>
-
-        <p>
-            منذ ذلك اليوم أصبحت للحياة تفاصيل أجمل،
-            وأصبحت ابتسامتكِ شيئاً مميزاً في أيامي.
-        </p>
-
-        <br>
-
-        <p class="highlight">
-            سعيدةٌ لأنكِ في حياتي ❤️
-        </p>
+    <div class="envelope-area" id="envelopeArea"
+         onclick="openLetter()">
+        <div class="envelope" id="envelope">
+            <span class="heart-seal">❤️</span>
+        </div>
     </div>
 
-    <button id="startButton" onclick="startSurprise()">
-        افتحي رسالتكِ ❤️
-    </button>
+    <p id="hint" style="font-size:14px;color:#a75c79">
+        اضغطي على الظرف لفتح رسالتكِ 💌
+    </p>
 
-    <div id="musicText">🎵 اضغطي لبدء المفاجأة والموسيقى</div>
+    <section class="letter" id="letter">
+
+        <h2 class="letter-title">
+            إلى من جعلت الأيام أجمل 🌷
+        </h2>
+
+        <div class="letter-text">
+
+            <span>هناك أيام تمر عادية...</span>
+
+            <span>وهناك يوم يبقى في الذاكرة إلى الأبد.</span>
+
+            <span class="special">
+                أفضل يوم في حياتي...
+            </span>
+
+            <span>
+                هو اليوم الذي تعرّفتُ عليكِ فيه ❤️
+            </span>
+
+            <span>
+                منذ ذلك اليوم أصبحت للحياة تفاصيل أجمل،
+                وأصبحت ابتسامتكِ شيئاً مميزاً في أيامي.
+            </span>
+
+            <div class="divider"></div>
+
+            <span class="special">
+                سعيدةٌ لأنكِ في حياتي ❤️
+            </span>
+
+        </div>
+
+        <div class="signature">
+            🌹 ❤️ 🌹
+        </div>
+
+    </section>
+
+    <div class="buttons">
+
+        <button class="open-btn" id="openBtn"
+                onclick="openLetter()">
+            افتحي رسالتكِ ❤️
+        </button>
+
+        <button class="music-btn" id="musicBtn"
+                onclick="toggleMusic()">
+            <span class="music-note">🎵</span>
+            تشغيل الموسيقى
+        </button>
+
+    </div>
 
     <div class="footer">
-        🌷 لكِ وحدكِ هذه الكلمات 🌷
+        بعض الصدف تصبح أجمل حكاية ❤️
     </div>
 
 </div>
+</main>
 
 <script>
 
-// إنشاء بتلات الورد
+/* ورود متساقطة */
+
+const petals = ["🌸","🌷","🌹","💗","🌺"];
+
 function createPetal() {
-    const petal = document.createElement("div");
-    petal.className = "petal";
-    petal.innerHTML = ["🌸","🌹","🌷","💗"][Math.floor(Math.random()*4)];
 
-    petal.style.left = Math.random()*100 + "vw";
-    petal.style.fontSize = (15 + Math.random()*20) + "px";
-    petal.style.animationDuration = (5 + Math.random()*6) + "s";
+    const p = document.createElement("div");
+    p.className = "petal";
 
-    document.body.appendChild(petal);
+    p.textContent =
+        petals[Math.floor(Math.random()*petals.length)];
 
-    setTimeout(() => petal.remove(), 11000);
+    p.style.left = Math.random()*100 + "vw";
+    p.style.fontSize = (14+Math.random()*19) + "px";
+    p.style.animationDuration = (6+Math.random()*7) + "s";
+
+    document.body.appendChild(p);
+
+    setTimeout(() => p.remove(),14000);
 }
 
-setInterval(createPetal, 450);
+setInterval(createPetal,500);
 
 
-// موسيقى بيانو هادئة مولدة برمجياً
-let audioContext;
-let musicStarted = false;
+/* قلوب صاعدة */
 
-function playMusic() {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    const notes = [
-        261.63, 329.63, 392.00, 329.63,
-        293.66, 349.23, 440.00, 349.23,
-        261.63, 329.63, 392.00, 523.25
-    ];
-
-    let index = 0;
-
-    function playNote() {
-        if (!musicStarted) return;
-
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-
-        oscillator.type = "sine";
-        oscillator.frequency.value = notes[index % notes.length];
-
-        gain.gain.setValueAtTime(0, audioContext.currentTime);
-        gain.gain.linearRampToValueAtTime(.045, audioContext.currentTime + .15);
-        gain.gain.exponentialRampToValueAtTime(.001, audioContext.currentTime + 2);
-
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 2);
-
-        index++;
-        setTimeout(playNote, 1100);
-    }
-
-    playNote();
-}
-
-
-// قلوب متحركة
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (15 + Math.random()*20) + "px";
 
-    document.body.appendChild(heart);
+    const h = document.createElement("div");
 
-    setTimeout(() => heart.remove(), 7500);
+    h.className = "floating-heart";
+    h.textContent = Math.random() > .5 ? "❤️" : "💕";
+
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (15+Math.random()*22) + "px";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => h.remove(),7500);
 }
 
 
-// تشغيل المفاجأة
-async function startSurprise() {
+/* فتح الرسالة */
 
-    document.getElementById("message").classList.add("show");
+let opened = false;
 
-    document.getElementById("startButton").style.display = "none";
+function openLetter() {
 
-    document.getElementById("musicText").innerHTML =
-        "🎶 موسيقى هادئة لأجمل إنسانة";
+    if(opened) return;
 
-    if (!musicStarted) {
-        musicStarted = true;
+    opened = true;
 
-        try {
-            if (!audioContext) {
-                playMusic();
-            } else {
-                await audioContext.resume();
-            }
-        } catch (e) {
-            document.getElementById("musicText").innerHTML =
-                "يمكن تشغيل الموسيقى بعد السماح بالصوت";
-        }
+    document.getElementById("envelope").classList.add("open");
+
+    document.getElementById("letter").classList.add("show");
+
+    document.getElementById("hint").style.display = "none";
+
+    document.getElementById("openBtn").style.display = "none";
+
+    document.getElementById("envelopeArea").style.display = "none";
+
+    for(let i=0;i<35;i++) {
+        setTimeout(createHeart,i*130);
     }
 
-    for (let i = 0; i < 25; i++) {
-        setTimeout(createHeart, i * 180);
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* موسيقى بيانو هادئة */
+
+let audioContext = null;
+let musicPlaying = false;
+let musicTimer = null;
+let noteIndex = 0;
+
+const melody = [
+    [261.63,329.63,392.00],
+    [293.66,349.23,440.00],
+    [261.63,329.63,392.00],
+    [220.00,293.66,349.23],
+    [246.94,329.63,392.00],
+    [293.66,369.99,440.00],
+    [261.63,329.63,392.00],
+    [220.00,261.63,329.63]
+];
+
+function playPianoNote(frequency, startTime, duration) {
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = frequency;
+
+    gain.gain.setValueAtTime(0.0001,startTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.035,startTime+0.08
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,startTime+duration
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(startTime);
+    oscillator.stop(startTime+duration);
+}
+
+function musicLoop() {
+
+    if(!musicPlaying) return;
+
+    const chord = melody[noteIndex % melody.length];
+    const now = audioContext.currentTime;
+
+    chord.forEach((frequency,index) => {
+        playPianoNote(
+            frequency,
+            now + index*.23,
+            2.1
+        );
+    });
+
+    // نغمة لحنية أعلى
+    playPianoNote(
+        chord[2]*2,
+        now+.55,
+        1.7
+    );
+
+    noteIndex++;
+
+    musicTimer = setTimeout(musicLoop,1800);
+}
+
+async function toggleMusic() {
+
+    const btn = document.getElementById("musicBtn");
+
+    if(!audioContext) {
+        audioContext = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
     }
 
+    if(audioContext.state === "suspended") {
+        await audioContext.resume();
+    }
+
+    if(!musicPlaying) {
+
+        musicPlaying = true;
+        musicLoop();
+
+        btn.innerHTML = "⏸ إيقاف الموسيقى";
+
+    } else {
+
+        musicPlaying = false;
+        clearTimeout(musicTimer);
+
+        btn.innerHTML = "🎵 تشغيل الموسيقى";
+    }
 }
 
 </script>
